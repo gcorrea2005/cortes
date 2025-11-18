@@ -163,6 +163,9 @@ def download_file(filename):
     print(f"DEBUG: Descargando archivo {filename}")  # Log
     return send_file(os.path.join(app.config['OUTPUT_FOLDER'], filename), as_attachment=True)
 
+# ... (otros imports)
+
 if __name__ == '__main__':
     app.secret_key = 'tu_clave_secreta_aqui'  # Añadir clave secreta para sesiones
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # <-- Leer puerto de variable de entorno
+    app.run(host='0.0.0.0', port=port, debug=False)  # <-- Cambiar host y debug
