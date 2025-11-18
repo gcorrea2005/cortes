@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}Subir archivos - Optimizador de Corte{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Subir archivos</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="tekla_file" class="form-label">Archivo de Tekla (.txt):</label>
+                        <input type="file" class="form-control" id="tekla_file" name="tekla_file" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inventario_file" class="form-label">Archivo de inventario (opcional):</label>
+                        <input type="file" class="form-control" id="inventario_file" name="inventario_file">
+                    </div>
+                    <button type="submit" class="btn btn-success">Subir y procesar</button>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}Inicio - Optimizador de Corte{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h2 class="card-title">Bienvenido al Optimizador de Corte</h2>
+                <p class="card-text">
+                    Sube tu archivo de Tekla y opcionalmente tu archivo de inventario para generar el plan de corte y armado.
+                </p>
+                <a href="{{ url_for('upload') }}" class="btn btn-primary">Ir a subir archivos</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

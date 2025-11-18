@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Resultados del corte</h1>
+    {% for res in resultados %}
+        <h2>{{ res.perfil }}</h2>
+        <p>Piezas usadas del inventario: {{ res.piezas_usadas }}</p>
+        <h3>Plan de corte:</h3>
+        <ul>
+            {% for barra in res.plan_corte %}
+                <li>{{ barra.id }}: {{ barra.partes }} → Desperdicio: {{ barra.resto|round(2) }} mm</li>
+            {% endfor %}
+        </ul>
+        <h3>Plan de armado:</h3>
+        <ul>
+            {% for pieza_num, partes_pieza in res.plan_armado.items() %}
+                <li>
+                    Pieza-{{ pieza_num }}:
+                    {% if partes_pieza|length == 1 %}
+                        {{ partes_pieza[0][0] }}({{ partes_pieza[0][1] }})
+                    {% else %}
+                        {% for nombre, longitud in partes_pieza %}
+                            {{ nombre }}({{ longitud }}){% if not loop.last %} + {% endif %}
+                        {% endfor %}
+                        → Ensamblar en una sola pieza
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        {% if res.grafico_corte %}
+            <h3>Gráfico de corte:</h3>
+            <img src="{{ url_for('static', filename='images/' + res.grafico_corte) }}" alt="Gráfico de corte">
+        {% endif %}
+        {% if res.grafico_armado %}
+            <h3>Gráfico de armado:</h3>
+            <img src="{{ url_for('static', filename='images/' + res.grafico_armado) }}" alt="Gráfico de armado">
+        {% endif %}
+        {% if res.excel %}
+            <a href="{{ url_for('download_file', filename=res.excel) }}">Descargar Excel</a>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

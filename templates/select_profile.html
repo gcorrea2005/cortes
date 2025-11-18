@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Seleccionar perfil - Optimizador de Corte{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h3 class="mb-0">Seleccionar perfil</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Elige un perfil para ver sus resultados:</p>
+                <ul class="list-group">
+                    {% for perfil in perfiles %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="{{ url_for('ver_resultado', perfil_seleccionado=perfil) }}">{{ perfil }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Volver al inicio</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

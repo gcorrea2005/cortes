@@ -1,0 +1,7 @@
+Perfil;Longitud;Cantidad;Ubicacion
+IPE240;11000;2;Almacen-A
+IPE450;11000;1;Almacen-B
+HEA450;11000;1;Almacen-C
+HI830-10-25*250;11000;3;Almacen-D
+HI830-10-25*250;11000;2;Almacen-E
+HI830-11-17*210;11000;1;Almacen-F

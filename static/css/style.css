@@ -1,0 +1,25 @@
+/* Personalizar estilos sobre Bootstrap */
+
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Centrar imágenes de gráficos */
+.resultado-grafico {
+    text-align: center;
+    margin: 20px 0;
+}
