@@ -5,7 +5,7 @@ import json  # Importar json
 from config import Config
 from modules.core import leer_longitudes_todas, usar_piezas_inventario, cortar_barras_optimizadas, mostrar_plan_de_armado, procesar_piezas_para_corte_optimizado
 from modules.inventory import leer_inventario
-from modules.graphics import graficar_barras_estandar, graficar_plan_de_armado  # <-- Importar graficar_plan_de_armado
+from modules.graphics import graficar_barras_estandar, graficar_plan_de_armado
 from modules.excel_export import exportar_a_excel
 
 def create_app():
@@ -62,7 +62,7 @@ def upload():
 
         # === Procesar cada perfil y guardar como archivo JSON ===
         print("DEBUG: Iniciando procesamiento...")  # Log
-        for perfil, lista_piezas in perfiles_ordenados:  # <-- Aquí está la variable definida
+        for perfil, lista_piezas in perfiles_ordenados:
             print(f"DEBUG: Procesando perfil {perfil} con piezas: {lista_piezas}")  # Log
 
             piezas_disponibles = inventario.get(perfil, [])
@@ -71,7 +71,7 @@ def upload():
             print(f"DEBUG: Piezas usadas: {piezas_usadas}, Restantes: {lista_piezas_restantes}")  # Log
 
             # === Procesar piezas restantes para corte (devuelve barras Y partes) ===
-            barras, partes = procesar_piezas_para_corte_optimizado(lista_piezas_restantes, limite_division=5995, longitud_barra=12000, cuchilla_corte=3)
+            partes = procesar_piezas_para_corte_optimizado(lista_piezas_restantes, limite_division=5995, longitud_barra=12000, cuchilla_corte=3)
 
             # === Cortar barras (ahora partes está en formato correcto) ===
             print(f"DEBUG: Cortando barras para perfil {perfil}...")  # Log
@@ -110,7 +110,7 @@ def upload():
                 'barras': barras,
                 'partes': partes,
                 'piezas_usadas': piezas_usadas,
-                'plan_armado': plan_armado,
+                'plan_armado': plan_armado,  # <-- Agregar plan_armado aquí
                 'grafico_corte': grafico_corte,
                 'grafico_armado': grafico_armado,  # <-- Agregar grafico_armado aquí
                 'excel': excel
@@ -163,9 +163,9 @@ def download_file(filename):
     print(f"DEBUG: Descargando archivo {filename}")  # Log
     return send_file(os.path.join(app.config['OUTPUT_FOLDER'], filename), as_attachment=True)
 
-# ... (otros imports)
-
 if __name__ == '__main__':
     app.secret_key = 'tu_clave_secreta_aqui'  # Añadir clave secreta para sesiones
-    port = int(os.environ.get('PORT', 5000))  # <-- Leer puerto de variable de entorno
+    # === Leer puerto de variable de entorno ===
+    port = int(os.environ.get('PORT', 5000))  # Puerto por defecto 5000
+    # === Correr en host 0.0.0.0 para que Render.com pueda acceder ===
     app.run(host='0.0.0.0', port=port, debug=False)  # <-- Cambiar host y debug
